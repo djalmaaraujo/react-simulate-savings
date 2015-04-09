@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container" className="container"></div>
+    <script type="text/jsx">
+      var SavingsResult = React.createClass({
+        propTypes: {
+          results: React.PropTypes.array.isRequired
+        },
+
+        render: function () {
+          var results = this.props.results;
+
+          var rows = results.map(function(row, i) {
+            return (
+              <tr key={i}>
+                <td>{row.month}</td>
+                <td>R${row.saving}</td>
+                <td>R${row.amount}</td>
+              </tr>
+            );
+          });
+
+          return (
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Month Saving</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {rows}
+              </tbody>
+            </table>
+          );
+        }
+      });
+
+      var Savings = React.createClass({
+        computeResults: function () {
+          var s = this.state;
+          var results = [];
+          var totalAmount = s.amount;
+
+          console.log(totalAmount, results);
+
+          for (var i = 1 ; i <= s.period ; i++) {
+            var saving = totalAmount * s.rate;
+            var amount = totalAmount + saving;
+
+            totalAmount = amount + s.monthSaving;
+
+            console.log(saving, amount, totalAmount);
+            results.push({month: i, saving: parseFloat(saving).toFixed(2), amount: parseFloat(amount).toFixed(2)});
+          }
+
+          return results;
+        },
+
+        getInitialState: function () {
+          return {
+            amount: 100000,
+            period: 12,
+            monthSaving: 1000,
+            rate: 0.005
+          };
+        },
+
+        updateField: function (field, e) {
+          var value = e.target.value;
+          var newState = {};
+          newState[field] = parseFloat(value);
+
+          this.setState(newState);
+        },
+
+        render: function() {
+          var results = this.computeResults();
+
+          return (
+            <div className="col-sm-12">
+              <h2>Simulate Savings</h2>
+              <form className="form-inline">
+                <div className="form-group">
+                  <label>Initial Amount</label>
+                  <input type="number" className="form-control" value={this.state.amount} onChange={this.updateField.bind(this, 'amount')} />
+                </div>
+
+                <div className="form-group">
+                  <label>Period in Months</label>
+                  <input type="number" className="form-control" value={this.state.period} onChange={this.updateField.bind(this, 'period')} />
+                </div>
+
+                <div className="form-group">
+                  <label>Your Month Saving</label>
+                  <input type="number" className="form-control" value={this.state.monthSaving} onChange={this.updateField.bind(this, 'monthSaving')} />
+                </div>
+
+                <div className="form-group">
+                  <label>Rate on the bank</label>
+                  <input type="number" className="form-control" value={this.state.rate} onChange={this.updateField.bind(this, 'rate')} />
+                </div>
+              </form>
+
+              <h2>Results</h2>
+
+              <SavingsResult results={results} />
+            </div>
+          );
+        }
+      });
+
+      React.render(<Savings />, document.getElementById('container'));
+    </script>
+  </body>
+</html>
