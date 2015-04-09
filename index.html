@@ -81,7 +81,7 @@
             value: this.state[attr],
             requestChange: function(val) {
               var newState = {};
-              newState[attr] = val;
+              newState[attr] = parseFloat(val);
               self.setState(newState);
             }
           }
