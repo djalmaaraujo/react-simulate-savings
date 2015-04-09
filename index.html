@@ -68,18 +68,19 @@
         getInitialState: function () {
           return {
             amount: 100000,
-            period: 12,
             monthSaving: 1000,
+            period: 12,
             rate: 0.005
           };
         },
 
-        updateField: function (field, e) {
-          var value = e.target.value;
-          var newState = {};
-          newState[field] = parseFloat(value);
-
-          this.setState(newState);
+        updateField: function () {
+          this.setState({
+            amount: parseFloat(React.findDOMNode(this.refs.amount).value),
+            monthSaving: parseFloat(React.findDOMNode(this.refs.monthSaving).value),
+            period: parseFloat(React.findDOMNode(this.refs.period).value),
+            rate: parseFloat(React.findDOMNode(this.refs.rate).value)
+          });
         },
 
         render: function() {
@@ -91,22 +92,22 @@
               <form className="form-vertical">
                 <div className="form-group">
                   <label>Initial Amount</label>
-                  <input type="number" className="form-control" value={this.state.amount} onChange={this.updateField.bind(this, 'amount')} />
+                  <input type="number" ref="amount" className="form-control" value={this.state.amount} onChange={this.updateField} />
                 </div>
 
                 <div className="form-group">
                   <label>Period in Months</label>
-                  <input type="number" className="form-control" value={this.state.period} onChange={this.updateField.bind(this, 'period')} />
+                  <input type="number" ref="period" className="form-control" value={this.state.period} onChange={this.updateField} />
                 </div>
 
                 <div className="form-group">
                   <label>Your Month Saving</label>
-                  <input type="number" className="form-control" value={this.state.monthSaving} onChange={this.updateField.bind(this, 'monthSaving')} />
+                  <input type="number" ref="monthSaving" className="form-control" value={this.state.monthSaving} onChange={this.updateField} />
                 </div>
 
                 <div className="form-group">
                   <label>Rate on the bank</label>
-                  <input type="number" className="form-control" value={this.state.rate} onChange={this.updateField.bind(this, 'rate')} />
+                  <input type="number" ref="rate" className="form-control" value={this.state.rate} onChange={this.updateField} />
                 </div>
               </form>
 
