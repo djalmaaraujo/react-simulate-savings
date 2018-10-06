@@ -1,28 +1,92 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-class App extends Component {
+import {
+  Grommet,
+  Heading,
+  Box,
+  ResponsiveContext,
+} from 'grommet';
+
+import { grommet } from 'grommet/themes';
+
+import Results from './Results'
+import FormData from './FormData'
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      results: [],
+      data: {
+        amount: '1000',
+        rate: '0.01', // 1%
+        period: '12', // 1 year
+        monthSaving: '0',
+      }
+    };
+  }
+
+  calculate(e) {
+    e.preventDefault();
+
+    const { data } = this.state;
+    const amount = parseFloat(data.amount) || null;
+    const rate = parseFloat(data.rate) || null;
+    const monthSaving = parseFloat(data.monthSaving) || null;
+    const period = parseInt(data.period, 10) || null;
+    const results = [];
+    let totalAmount = amount;
+
+    for (let i = 1 ; i <= period ; i++) {
+      const saving = totalAmount * rate;
+      const amount = totalAmount + saving;
+
+      totalAmount = amount + monthSaving;
+
+      results.push({ month: i, saving: saving.toFixed(2), amount: amount.toFixed(2) });
+    }
+
+    this.setState({ results })
+  }
+
+  onChangeInput(name, value) {
+    const data = this.state.data;
+
+    data[name] = value;
+
+    this.setState({ data });
+  }
+
   render() {
+    const {
+      data,
+      results
+    } = this.state;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Grommet theme={grommet} full>
+        <Box align="center" justify="center">
+          <Heading textAlign="center" level={1}>Calculadora Juros Composto</Heading>
+
+          <ResponsiveContext.Consumer>
+            { value => (<Box align="start" direction={(value === 'wide') ? 'row' : 'column'} alignContent="between">
+              <FormData
+                data={data}
+                onSubmit={this.calculate.bind(this)}
+                onChangeInput={this.onChangeInput.bind(this)}
+              />
+
+              { results && (results.length > 0) && <React.Fragment>
+                  { (value !== 'wide') ? <Heading textAlign="center" level={3}>Resultados</Heading> : null }
+                  <Results results={results} />
+                </React.Fragment>
+              }
+            </Box>)
+            }
+          </ResponsiveContext.Consumer>
+        </Box>
+      </Grommet>
     );
   }
 }
-
-export default App;
