@@ -7,10 +7,10 @@ import {
   ResponsiveContext,
 } from 'grommet';
 
-import { grommet } from 'grommet/themes';
 
-import Results from './Results'
-import FormData from './FormData'
+import Results from './Results';
+import FormData from './FormData';
+import Theme from './Theme';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,8 +27,12 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.calculate();
+  }
+
   calculate(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     const { data } = this.state;
     const amount = parseFloat(data.amount) || null;
@@ -65,7 +69,7 @@ export default class App extends React.Component {
     } = this.state;
 
     return (
-      <Grommet theme={grommet} full>
+      <Grommet theme={Theme} full>
         <Box align="center" justify="center">
           <Heading textAlign="center" level={1}>Calculadora Juros Composto</Heading>
 
