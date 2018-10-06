@@ -2,7 +2,7 @@
   "name": "react-simulate-savings",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://djalmaaraujo.github.io/react-simulate-savings",
+  "homepage": "http://calculadora.nossomos.cc",
   "dependencies": {
     "babel-plugin-grommet": "^0.5.3",
     "babel-plugin-styled-components": "^1.8.0",
