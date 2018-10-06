@@ -47,6 +47,7 @@ export default ({
         <Input
           value={data.monthSaving}
           name="monthSaving"
+          step="0.01"
           handler={onChangeInput}
         />
       </FormField>
