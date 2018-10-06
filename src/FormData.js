@@ -28,6 +28,7 @@ export default ({
         <Input
           value={data.amount}
           name="amount"
+          step="0.01"
           handler={onChangeInput}
         />
       </FormField>
