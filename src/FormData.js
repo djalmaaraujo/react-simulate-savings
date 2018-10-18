@@ -28,7 +28,6 @@ export default ({
         <Input
           value={data.amount}
           name="amount"
-          step="0.01"
           handler={onChangeInput}
         />
       </FormField>
@@ -47,7 +46,6 @@ export default ({
         <Input
           value={data.monthSaving}
           name="monthSaving"
-          step="0.01"
           handler={onChangeInput}
         />
       </FormField>
@@ -56,7 +54,6 @@ export default ({
         <Input
           value={data.rate}
           name="rate"
-          step="0.01"
           handler={onChangeInput}
         />
       </FormField>
