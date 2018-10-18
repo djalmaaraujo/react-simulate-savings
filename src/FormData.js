@@ -10,8 +10,7 @@ import {
 
 const Input = ({name, handler, ...rest}) => (
   <TextInput
-    type="number"
-    min={0}
+    type="text"
     onChange={(e) => handler(name, e.target.value) }
     {...rest}
   />
@@ -36,6 +35,7 @@ export default ({
         <Input
           value={data.period}
           name="period"
+          type="number"
           step={1}
           min={1}
           handler={onChangeInput}
