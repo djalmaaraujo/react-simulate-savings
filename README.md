@@ -1,6 +1,6 @@
 # Calculadora - Juros Compostos
 
-Experimento para simular o rendimento da poupança em um período de meses, incluindo um aporte mensal.
+Experimento para simular o rendimento mensal de uma aplicação configurando % mensal, aporte mensal etc.
 
 :point_right: https://calculadora.nossomos.cc/
 
