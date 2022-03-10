@@ -4,4 +4,4 @@ Experimento para simular o rendimento mensal de uma aplicação configurando % m
 
 :point_right: https://calculadora.nossomos.cc/
 
-![image](https://raw.githubusercontent.com/djalmaaraujo/react-simulate-savings/master/preview.png)
+Este projeto é usado como aprendizado. Já foi feito em várias tecnologias, incluindo webpack, create react app, react puro, e agora com React + Vitejs.
