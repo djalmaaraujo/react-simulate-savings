@@ -2,8 +2,8 @@ import './Results.css';
 import { CalcRow } from '../../utils/calculate';
 import { Box } from '../Box/Box';
 
-const TotalOf = (field: string, data: Array<CalcRow>) =>
-  data.reduce((acc: number, item) => acc + item[field], 0).toFixed(2);
+const TotalOf = (field: string, data: Array<CalcRow>): number =>
+  data.reduce((acc: number, item: any) => acc + item[field], 0)
 const dollarUSLocale = Intl.NumberFormat('pt-BR');
 
 interface ResultProps {

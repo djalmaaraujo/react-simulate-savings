@@ -40,9 +40,11 @@ export const Calculator = ({ onSubmitHandler }: CalculatorProps) => {
     fieldName: string
   ): ChangeEventHandler<HTMLInputElement> | undefined => {
     return (event: ChangeEvent) => {
+      const target = event.target as HTMLTextAreaElement;
+
       setValue({
         ...values,
-        [fieldName]: parseFloat(event.target.value) || 0,
+        [fieldName]: parseFloat(target.value) || 0,
       });
     };
   };
