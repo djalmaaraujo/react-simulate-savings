@@ -11,6 +11,7 @@ import {
 } from 'grommet';
 
 const TotalOf = (field, data) => (data.reduce((acc, item) => acc + parseFloat(item[field]), 0)).toFixed(2)
+const dollarUSLocale = Intl.NumberFormat('en-US');
 
 export default ({
   results
@@ -37,8 +38,8 @@ export default ({
       <TableFooter>
         <TableRow>
           <TableCell border='top' scope='row'>-</TableCell>
-          <TableCell border='top'><strong>R${TotalOf('saving', results)}</strong></TableCell>
-          <TableCell border='top'><strong>R${ results[results.length-1].amount }</strong></TableCell>
+          <TableCell border='top'><strong>R${dollarUSLocale.format(TotalOf('saving', results))}</strong></TableCell>
+          <TableCell border='top'><strong>R${ dollarUSLocale.format(results[results.length-1].amount) }</strong></TableCell>
         </TableRow>
       </TableFooter>
     </Table>
